@@ -1,7 +1,7 @@
+import { parseDate } from "../utils/utils";
+
 const Article = ({ article }) => {
-  const parseDate = () => {
-    return new Date().toISOString().split("T", 1)[0];
-  };
+
 
   return (
     <>
