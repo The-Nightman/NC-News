@@ -10,9 +10,6 @@ export const getAllArticles = () => {
     .then((res) => {
       return res.data.articles;
     })
-    .catch((err) => {
-      console.log(err);
-    });
 };
 
 export const getArticleByID = (article_id) => {
@@ -21,7 +18,4 @@ export const getArticleByID = (article_id) => {
     .then((res) => {
       return res.data.article;
     })
-    .catch((err) => {
-      console.log(err);
-    });
 };
