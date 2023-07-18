@@ -6,7 +6,7 @@ import "./components/components.css";
 function App() {
   return (
     <>
-      <Header></Header>
+      <Header/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/article" element={<ArticlePage />} />

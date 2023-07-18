@@ -18,7 +18,7 @@ const ArticleCard = ({
       <div className="article-card">
         <div className="card-body">
           <div className="card-text">
-            <h3 className="card-title">{title}</h3>
+            <h2 className="card-title">{title}</h2>
             <p>{author}</p>
             <p>{topic}</p>
             <div className="card-article-details">
@@ -29,7 +29,7 @@ const ArticleCard = ({
               <p className="article-date">{parseDate(created_at)}</p>
             </div>
           </div>
-          <img src={image} />
+          <img src={image} alt="an image relating to the article title"/>
         </div>
       </div>
     </>
