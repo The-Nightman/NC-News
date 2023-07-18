@@ -1,5 +1,11 @@
+import { ArticlesContainer, ArticleCard } from "../components";
+
 const Home = () => {
-  return <></>;
+  return (
+    <>
+      <ArticlesContainer />
+    </>
+  );
 };
 
 export default Home;

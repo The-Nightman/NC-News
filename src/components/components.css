@@ -1,0 +1,40 @@
+:root {
+    --lightmode-background: #555555;
+}
+/* article cards */
+.article-card {
+    width: 80vw;
+    background-color: var(--lightmode-background);
+    border-radius: 1rem;
+}
+.card-body {
+    position: relative;
+}
+.article-card img {
+    max-height: 40%;
+    position: absolute;
+    top: 4rem;
+    right: 1rem;
+    border-radius: 0.3rem;
+}
+.card-text {
+        padding-left: 1rem;
+        padding-right: 1rem;
+}
+.card-title {
+    padding-top: 0.5rem;
+}
+.card-article-details {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+}
+.card-comments-votes {
+    display: inline-flex;
+}
+.card-comments-votes p {
+    margin-right: 1rem;
+}
+.article-date {
+    position: relative;
+}
