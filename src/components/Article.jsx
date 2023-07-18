@@ -1,7 +1,17 @@
+import Button from '@mui/material/Button'
+import ButtonGroup from '@mui/material/ButtonGroup'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { parseDate } from "../utils/utils";
 
 const Article = ({ article, openComments, showComments }) => {
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#eeeeee',
+    },
+  },
+});
 
   return (
     <>
@@ -21,10 +31,12 @@ const Article = ({ article, openComments, showComments }) => {
             className="article-image"
           />
           <p>{article.body}</p>
-          <div className="article-footer">
-            <p onClick={() => openComments(!showComments)}>comments: {article.comment_count}</p>
-            <p>votes: {article.votes}</p>
-          </div>
+          <ThemeProvider theme={theme}>
+          <ButtonGroup variant="outlined" className="article-footer">
+            <Button color='primary' onClick={() => openComments(!showComments)}>comments: {article.comment_count}</Button>
+            <Button color='primary'>votes: {article.votes}</Button>
+          </ButtonGroup>
+          </ThemeProvider>
         </article>
       </section>
     </>

@@ -68,12 +68,9 @@ body {
     padding: 0.5rem;
 }
 .article-footer {
+    width: 100%;
     display: flex;
-    justify-content: space-evenly;
-}
-.article-footer p, a {
-    margin: 0;
-    padding: 0;
+    justify-content: center;
 }
 /* comment cards */
 .comment-card {
