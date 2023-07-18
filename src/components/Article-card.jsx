@@ -29,7 +29,7 @@ const ArticleCard = ({
               <p className="article-date">{parseDate(created_at)}</p>
             </div>
           </div>
-          <img src={image} alt="an image relating to the article title"/>
+          <img src={image} alt={title}/>
         </div>
       </div>
     </>
