@@ -13,7 +13,6 @@ body {
 }
 /* article cards */
 .article-card {
-    width: 80vw;
     background-color: var(--lightmode-background);
     border-radius: 1rem;
 }
