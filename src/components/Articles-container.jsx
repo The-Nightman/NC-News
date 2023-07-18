@@ -1,14 +1,16 @@
-import { ArticleCard } from "../components";
+import { ArticleCard, Loader } from "../components";
 import { useEffect, useState } from "react";
 import { getAllArticles } from "../utils/api";
 
 const ArticlesContainer = () => {
   const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getAllArticles()
       .then((data) => {
         setArticles(data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -17,19 +19,22 @@ const ArticlesContainer = () => {
 
   return (
     <>
-      <div className="articles">
-        {articles.map(
-          ({
-            article_id,
-            title,
-            topic,
-            author,
-            created_at,
-            votes,
-            article_img_url,
-            comment_count,
-          }) => {
-            return (
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="articles">
+          {articles.map(
+            ({
+              article_id,
+              title,
+              topic,
+              author,
+              created_at,
+              votes,
+              article_img_url,
+              comment_count,
+            }) => {
+              return (
                 <ArticleCard
                   article_id={article_id}
                   key={article_id}
@@ -41,10 +46,11 @@ const ArticlesContainer = () => {
                   votes={votes}
                   comment_count={comment_count}
                 />
-            );
-          }
-        )}
-      </div>
+              );
+            }
+          )}
+        </div>
+      )}
     </>
   );
 };
