@@ -1,6 +1,6 @@
 import { parseDate } from "../utils/utils";
 
-const Article = ({ article }) => {
+const Article = ({ article, openComments, showComments }) => {
 
 
   return (
@@ -22,7 +22,7 @@ const Article = ({ article }) => {
           />
           <p>{article.body}</p>
           <div className="article-footer">
-            <a>comments: {article.comment_count}</a>
+            <p onClick={() => openComments(!showComments)}>comments: {article.comment_count}</p>
             <p>votes: {article.votes}</p>
           </div>
         </article>
