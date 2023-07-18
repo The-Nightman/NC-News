@@ -1,15 +1,14 @@
 import { ArticleCard } from "../components";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { getAllArticles } from "../utils/api";
 
 const ArticlesContainer = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`https://nc-news-v54w.onrender.com/api/articles`)
-      .then((res) => {
-        setArticles(res.data.articles);
+    getAllArticles()
+      .then((data) => {
+        setArticles(data);
       })
       .catch((err) => {
         console.log(err);
@@ -31,16 +30,17 @@ const ArticlesContainer = () => {
             comment_count,
           }) => {
             return (
-              <ArticleCard
-                key={article_id}
-                title={title}
-                topic={topic}
-                author={author}
-                created_at={created_at}
-                image={article_img_url}
-                votes={votes}
-                comment_count={comment_count}
-              />
+                <ArticleCard
+                  article_id={article_id}
+                  key={article_id}
+                  title={title}
+                  topic={topic}
+                  author={author}
+                  created_at={created_at}
+                  image={article_img_url}
+                  votes={votes}
+                  comment_count={comment_count}
+                />
             );
           }
         )}
