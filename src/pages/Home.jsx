@@ -1,4 +1,4 @@
-import { ArticlesContainer, ArticleCard } from "../components";
+import { ArticlesContainer } from "../components";
 
 const Home = () => {
   return (

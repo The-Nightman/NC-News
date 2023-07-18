@@ -6,5 +6,6 @@ import ArticlesContainer from './Articles-container'
 import CommentCard from './Comment-cards'
 import UserCard from './User-card'
 import UsersContainer from './Users-container'
+import Loader from './loader'
 
-export { Header, Menu, Article, ArticleCard, ArticlesContainer, CommentCard, UserCard, UsersContainer };
+export { Header, Menu, Article, ArticleCard, ArticlesContainer, CommentCard, UserCard, UsersContainer, Loader };

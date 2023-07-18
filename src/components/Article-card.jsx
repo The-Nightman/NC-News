@@ -1,4 +1,8 @@
+import { parseDate } from "../utils/utils";
+import { useNavigate } from "react-router-dom"
+
 const ArticleCard = ({
+  article_id,
   title,
   author,
   topic,
@@ -8,14 +12,15 @@ const ArticleCard = ({
   created_at,
 }) => {
 
-    const parseDate = () => {
-        return new Date().toISOString().split('T', 1)[0]
-    }
+  const navigate = useNavigate();
 
+  const onClick = () => {
+    navigate(`/article/${article_id}`)
+  }
 
   return (
     <>
-      <div className="article-card">
+      <div className="article-card" onClick={onClick}>
         <div className="card-body">
           <div className="card-text">
             <h2 className="card-title">{title}</h2>
@@ -29,7 +34,7 @@ const ArticleCard = ({
               <p className="article-date">{parseDate(created_at)}</p>
             </div>
           </div>
-          <img src={image} alt="an image relating to the article title"/>
+          <img src={image} alt={title}/>
         </div>
       </div>
     </>
