@@ -1,3 +1,5 @@
+import { parseDate } from "../utils/utils";
+
 const ArticleCard = ({
   title,
   author,
@@ -7,11 +9,6 @@ const ArticleCard = ({
   votes,
   created_at,
 }) => {
-
-    const parseDate = () => {
-        return new Date().toISOString().split('T', 1)[0]
-    }
-
 
   return (
     <>
