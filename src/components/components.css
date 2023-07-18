@@ -8,6 +8,8 @@ body {
 /* header */
 .app-header {
     background-color: #850000;
+    display: flex;
+    justify-content: center;
 }
 /* article cards */
 .article-card {
