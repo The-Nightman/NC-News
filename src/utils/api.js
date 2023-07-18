@@ -15,7 +15,7 @@ export const getAllArticles = () => {
     });
 };
 
-export const getArticle = (article_id) => {
+export const getArticleByID = (article_id) => {
   return ncNewsApi
     .get(`/articles/${article_id}`)
     .then((res) => {
