@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { CommentCard } from "../components";
+import { CommentCard, Loader } from "../components";
 import { getArticleComments } from "../utils/api";
 import { Alert, createTheme, ThemeProvider } from "@mui/material";
 
@@ -13,11 +13,13 @@ const CommentsContainer = ({ article_id }) => {
   });
 
   const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getArticleComments(article_id)
       .then((data) => {
         setComments(data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -25,7 +27,7 @@ const CommentsContainer = ({ article_id }) => {
   }, []);
   return (
     <>
-      {comments.length ? (
+      {!loading ? comments.length ? (
         <>
           {comments.map(({ comment_id, author, created_at, votes, body }) => {
             return (
@@ -41,11 +43,16 @@ const CommentsContainer = ({ article_id }) => {
         </>
       ) : (
         <ThemeProvider theme={theme}>
-        <Alert variant="filled" severity="info" color="primary" style={{ margin: "0.5rem" }}>
-          This article has no comments!
-        </Alert>
+          <Alert
+            variant="filled"
+            severity="info"
+            color="primary"
+            style={{ margin: "0.5rem" }}
+          >
+            This article has no comments!
+          </Alert>
         </ThemeProvider>
-      )}
+      ) : <Loader />}
     </>
   );
 };

@@ -26,7 +26,6 @@ const ArticlePage = () => {
 
   return (
     <>
-    
       {loading ? (
         <Loader />
       ) : (
@@ -34,7 +33,7 @@ const ArticlePage = () => {
       )}
       {showComments ? (
         <div className="comments">
-          <CommentsContainer article_id={article_id}/>
+          <CommentsContainer article_id={article_id} />
         </div>
       ) : null}
     </>
