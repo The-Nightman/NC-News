@@ -13,7 +13,6 @@ body {
 }
 /* article cards */
 .article-card {
-    width: 80vw;
     background-color: var(--lightmode-background);
     border-radius: 1rem;
 }
@@ -53,7 +52,7 @@ body {
 }
 /* article */
 .article-container {
-    background-color: #555555;
+    background-color: var(--lightmode-background);
     border-radius: 1rem;
     margin: 0.5rem;
 }
@@ -69,10 +68,20 @@ body {
     padding: 0.5rem;
 }
 .article-footer {
+    width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }
-.article-footer p, a {
-    margin: 0;
-    padding: 0;
+/* comment cards */
+.comment-card {
+    background-color: var(--lightmode-background);
+    border-radius: 1rem;
+    margin: 0.5rem;
+}
+.comment-content {
+    padding: 0.5rem;
+}
+.comment-header {
+    display: flex;
+    justify-content: space-between;
 }
