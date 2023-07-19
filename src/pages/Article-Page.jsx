@@ -1,12 +1,11 @@
-import { Article, Loader, CommentCard } from "../components";
+import { Article, Loader, CommentsContainer } from "../components";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getArticleByID, getArticleComments } from "../utils/api";
+import { getArticleByID } from "../utils/api";
 
 const ArticlePage = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
-  const [comments, setComments] = useState({});
   const [showComments, setShowComments] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -25,18 +24,9 @@ const ArticlePage = () => {
       });
   }, []);
 
-  useEffect(() => {
-    getArticleComments(article_id)
-      .then((data) => {
-        setComments(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   return (
     <>
+    
       {loading ? (
         <Loader />
       ) : (
@@ -44,17 +34,7 @@ const ArticlePage = () => {
       )}
       {showComments ? (
         <div className="comments">
-          {comments.map(({ comment_id, author, created_at, votes, body }) => {
-            return (
-              <CommentCard
-                key={comment_id}
-                author={author}
-                created_at={created_at}
-                body={body}
-                votes={votes}
-              />
-            );
-          })}
+          <CommentsContainer article_id={article_id}/>
         </div>
       ) : null}
     </>
