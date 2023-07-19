@@ -1,4 +1,4 @@
-import ArticleButtons from "../components";
+import { ArticleButtons } from "../components";
 import { parseDate } from "../utils/utils";
 
 const Article = ({ article, openComments, showComments }) => {
@@ -21,7 +21,7 @@ const Article = ({ article, openComments, showComments }) => {
           />
           <p>{article.body}</p>
           <div className="article-footer">
-            <ArticleButtons article_votes={article.votes} comment_count={article.comment_count}/>
+            <ArticleButtons article={article} openComments={openComments} showComments={showComments}/>
           </div>
         </article>
       </section>

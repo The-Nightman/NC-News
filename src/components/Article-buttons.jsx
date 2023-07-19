@@ -4,10 +4,11 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowCircleDownOutlinedIcon from "@mui/icons-material/ArrowCircleDownOutlined";
 import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
+import { updateArticleVotes } from "../utils/api";
 import { useState } from "react";
 
-const ArticleButtons = ({ article_votes, comment_count }) => {
-  const [votes, setVotes] = useState(article_votes);
+const ArticleButtons = ({ article, openComments, showComments }) => {
+  const [votes, setVotes] = useState(article.votes);
   const [upvote, setUpvote] = useState(false);
   const [downvote, setDownvote] = useState(false);
   const [upvoteCol, setUpvoteCol] = useState("primary");
@@ -15,24 +16,40 @@ const ArticleButtons = ({ article_votes, comment_count }) => {
 
   const handleUpVote = (upvote) => {
     if (upvote) {
-      setVotes(article_votes);
+      setVotes(article.votes);
       setUpvote(false);
       setUpvoteCol("primary");
+      updateArticleVotes(article.article_id, -1).then((data) => {
+        console.log(data.votes);
+        setVotes(data.votes);
+      });
     } else {
       setVotes(article.votes + 1);
       setUpvote(true);
       setUpvoteCol("upvote");
+      updateArticleVotes(article.article_id, 1).then((data) => {
+        console.log(data.votes);
+        setVotes(data.votes);
+      });
     }
   };
   const handleDownVote = (downvote) => {
     if (downvote) {
-      setVotes(article_votes);
+      setVotes(article.votes);
       setDownvote(false);
       setDownvoteCol("primary");
+      updateArticleVotes(article.article_id, 1).then((data) => {
+        console.log(data.votes);
+        setVotes(data.votes);
+      });
     } else {
       setVotes(article.votes - 1);
       setDownvote(true);
       setDownvoteCol("downvote");
+      updateArticleVotes(article.article_id, -1).then((data) => {
+        console.log(data.votes);
+        setVotes(data.votes);
+      });
     }
   };
 
@@ -56,6 +73,7 @@ const ArticleButtons = ({ article_votes, comment_count }) => {
         <ButtonGroup>
           <IconButton
             color={upvoteCol}
+            disabled={downvote}
             aria-label="upvote article"
             onClick={() => handleUpVote(upvote)}
           >
@@ -64,6 +82,7 @@ const ArticleButtons = ({ article_votes, comment_count }) => {
           <p>Votes: {votes}</p>
           <IconButton
             color={downvoteCol}
+            disabled={upvote}
             aria-label="downvote article"
             onClick={() => handleDownVote(downvote)}
           >
@@ -76,7 +95,7 @@ const ArticleButtons = ({ article_votes, comment_count }) => {
             aria-label="open comments"
             onClick={() => openComments(!showComments)}
           >
-            comments: {comment_count}
+            comments: {article.comment_count}
           </Button>
         </ButtonGroup>
       </ThemeProvider>

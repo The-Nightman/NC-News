@@ -27,3 +27,11 @@ export const getArticleComments = (article_id) => {
       return res.data.comments;
     })
 };
+
+export const updateArticleVotes = (article_id, voteUpdate) => {
+  return ncNewsApi
+    .patch(`/articles/${article_id}`, {inc_votes: voteUpdate})
+    .then((res) => {
+      return res.data.article;
+    })
+};
