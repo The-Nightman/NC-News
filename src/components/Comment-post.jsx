@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Loader } from "../components";
 import { Button, TextField, Alert, createTheme, ThemeProvider } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { postNewComment } from "../utils/api";
@@ -6,6 +7,8 @@ import CommentCard from "./Comment-cards";
 import { newDate } from "../utils/utils";
 
 const CommentPost = ({ article_id, setComments }) => {
+  const [postStatus, setPostStatus] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [comment, setComment] = useState("");
   const [commentStatus, setCommentStatus] = useState("");
   let placeholder = { author: "weegembump", votes: 0 }
@@ -24,24 +27,30 @@ const CommentPost = ({ article_id, setComments }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
+    setPostStatus(true)
     postNewComment(article_id, {
       body: comment,
       author: placeholder.author,
     })
       .then((data) => {
         setCommentStatus("success");
+        setLoading(false)
         setComments((comments) => {
           return [...comments, data];
         });
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false)
+        setPostStatus(false)
         setCommentStatus("error");
       });
   };
 
   return (
     <>
+    { loading ? <Loader/> : null }
     <ThemeProvider theme={theme}>
       {commentStatus === "" ? (
         <div className="new-comment-container">
@@ -59,6 +68,7 @@ const CommentPost = ({ article_id, setComments }) => {
               label="New Comment"
               variant="standard"
               value={comment}
+              disabled={postStatus}
               onChange={handleChange}
             />
             <div className="comment-form-button-container">
@@ -66,6 +76,7 @@ const CommentPost = ({ article_id, setComments }) => {
                 type="submit"
                 className="comment-form-button"
                 variant="outlined"
+                disabled={postStatus}
                 endIcon={<SendIcon />}
               >
                 Send
@@ -105,6 +116,7 @@ const CommentPost = ({ article_id, setComments }) => {
                 label="New Comment"
                 variant="standard"
                 value={comment}
+                disabled={postStatus}
                 onChange={handleChange}
               />
               <div className="comment-form-button-container">
@@ -112,6 +124,7 @@ const CommentPost = ({ article_id, setComments }) => {
                   type="submit"
                   className="comment-form-button"
                   variant="outlined"
+                  disabled={postStatus}
                   endIcon={<SendIcon />}
                 >
                   Send
