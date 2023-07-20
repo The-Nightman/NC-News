@@ -39,7 +39,7 @@ const CommentPost = ({ article_id, setComments }) => {
         setCommentStatus("error");
       });
   };
-  console.log(placeholder)
+
   return (
     <>
     <ThemeProvider theme={theme}>
@@ -80,7 +80,7 @@ const CommentPost = ({ article_id, setComments }) => {
           </Alert>
           <CommentCard
             author={placeholder.author}
-            created_at={newDate}
+            created_at={newDate()}
             body={comment}
             votes={placeholder.votes}
           />
