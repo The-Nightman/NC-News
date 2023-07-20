@@ -35,3 +35,11 @@ export const updateArticleVotes = (article_id, voteUpdate) => {
       return res.data.article;
     })
 };
+
+export const postNewComment = (article_id, newComment) => {
+  return ncNewsApi
+    .post(`/articles/${article_id}/comments`, newComment)
+    .then((res) => {
+      return res.data.comment;
+    })
+};
