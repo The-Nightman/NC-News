@@ -3,7 +3,7 @@ import { Button, TextField, Alert, createTheme, ThemeProvider } from "@mui/mater
 import SendIcon from "@mui/icons-material/Send";
 import { postNewComment } from "../utils/api";
 import CommentCard from "./Comment-cards";
-import { parseDate } from "../utils/utils";
+import { newDate } from "../utils/utils";
 
 const CommentPost = ({ article_id, setComments }) => {
   const [comment, setComment] = useState("");
@@ -80,7 +80,7 @@ const CommentPost = ({ article_id, setComments }) => {
           </Alert>
           <CommentCard
             author={placeholder.author}
-            created_at={parseDate}
+            created_at={newDate}
             body={comment}
             votes={placeholder.votes}
           />
