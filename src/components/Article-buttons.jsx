@@ -8,6 +8,7 @@ import { updateArticleVotes } from "../utils/api";
 import { useState } from "react";
 
 const ArticleButtons = ({ article, openComments, showComments }) => {
+  const articleVotes = article.votes
   const [votes, setVotes] = useState(article.votes);
   const [upvote, setUpvote] = useState(false);
   const [downvote, setDownvote] = useState(false);
@@ -16,39 +17,39 @@ const ArticleButtons = ({ article, openComments, showComments }) => {
 
   const handleUpVote = (upvote) => {
     if (upvote) {
-      setVotes(article.votes);
+      setVotes(articleVotes);
       setUpvote(false);
       setUpvoteCol("primary");
-      updateArticleVotes(article.article_id, -1).then((data) => {
-        console.log(data.votes);
-        setVotes(data.votes);
+      updateArticleVotes(article.article_id, -1)
+      .catch((err) => {
+        alert("Something went wrong")
       });
     } else {
-      setVotes(article.votes + 1);
+      setVotes(articleVotes + 1);
       setUpvote(true);
       setUpvoteCol("upvote");
-      updateArticleVotes(article.article_id, 1).then((data) => {
-        console.log(data.votes);
-        setVotes(data.votes);
+      updateArticleVotes(article.article_id, 1)
+      .catch((err) => {
+        alert("Something went wrong")
       });
     }
   };
   const handleDownVote = (downvote) => {
     if (downvote) {
-      setVotes(article.votes);
+      setVotes(articleVotes);
       setDownvote(false);
       setDownvoteCol("primary");
-      updateArticleVotes(article.article_id, 1).then((data) => {
-        console.log(data.votes);
-        setVotes(data.votes);
+      updateArticleVotes(article.article_id, 1)
+      .catch((err) => {
+        alert("Something went wrong")
       });
     } else {
-      setVotes(article.votes - 1);
+      setVotes(articleVotes - 1);
       setDownvote(true);
       setDownvoteCol("downvote");
-      updateArticleVotes(article.article_id, -1).then((data) => {
-        console.log(data.votes);
-        setVotes(data.votes);
+      updateArticleVotes(article.article_id, -1)
+      .catch((err) => {
+        alert("Something went wrong")
       });
     }
   };
@@ -104,3 +105,5 @@ const ArticleButtons = ({ article, openComments, showComments }) => {
 };
 
 export default ArticleButtons;
+
+
