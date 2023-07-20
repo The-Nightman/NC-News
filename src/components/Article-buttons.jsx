@@ -15,6 +15,19 @@ const ArticleButtons = ({ article, openComments, showComments }) => {
   const [upvoteCol, setUpvoteCol] = useState("primary");
   const [downvoteCol, setDownvoteCol] = useState("primary");
 
+  const voteError = (vote) => {
+    if (vote === "upvote") {
+      setUpvote(false)
+      setDownvote(false)
+      setUpvoteCol("primary")
+    } else if (vote === "downvote") {
+      setDownvote(false)
+      setUpvote(false)
+      setDownvoteCol("primary")
+    }
+    setVotes(article.votes)
+  }
+
   const handleUpVote = (upvote) => {
     if (upvote) {
       setVotes(articleVotes);
@@ -23,6 +36,7 @@ const ArticleButtons = ({ article, openComments, showComments }) => {
       updateArticleVotes(article.article_id, -1)
       .catch((err) => {
         alert("Something went wrong")
+        voteError("upvote")
       });
     } else {
       setVotes(articleVotes + 1);
@@ -31,6 +45,7 @@ const ArticleButtons = ({ article, openComments, showComments }) => {
       updateArticleVotes(article.article_id, 1)
       .catch((err) => {
         alert("Something went wrong")
+        voteError("upvote")
       });
     }
   };
@@ -42,6 +57,7 @@ const ArticleButtons = ({ article, openComments, showComments }) => {
       updateArticleVotes(article.article_id, 1)
       .catch((err) => {
         alert("Something went wrong")
+        voteError("downvote")
       });
     } else {
       setVotes(articleVotes - 1);
@@ -50,6 +66,7 @@ const ArticleButtons = ({ article, openComments, showComments }) => {
       updateArticleVotes(article.article_id, -1)
       .catch((err) => {
         alert("Something went wrong")
+        voteError("downvote")
       });
     }
   };
