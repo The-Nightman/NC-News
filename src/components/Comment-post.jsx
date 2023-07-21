@@ -41,7 +41,6 @@ const CommentPost = ({ article_id, setComments }) => {
         });
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false)
         setPostStatus(false)
         setCommentStatus("error");
