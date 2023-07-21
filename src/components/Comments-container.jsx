@@ -25,6 +25,7 @@ const CommentsContainer = ({ article_id }) => {
         console.log(err);
       });
   }, []);
+  
   return (
     <>
       {!loading ? (

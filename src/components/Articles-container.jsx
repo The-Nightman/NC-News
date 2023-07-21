@@ -1,25 +1,31 @@
 import { ArticleCard, Loader } from "../components";
 import { useEffect, useState } from "react";
 import { getAllArticles } from "../utils/api";
+import { Alert } from "@mui/material";
 
-const ArticlesContainer = () => {
+const ArticlesContainer = ({ sort_by, order, topic }) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    getAllArticles()
+    getAllArticles(sort_by, order, topic)
       .then((data) => {
         setArticles(data);
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setError(true);
       });
   }, []);
 
   return (
     <>
-      {loading ? (
+      {error ? (
+        <Alert severity="error">
+          An error has occured! Unable to load articles
+        </Alert>
+      ) : loading ? (
         <Loader />
       ) : (
         <div className="articles">
