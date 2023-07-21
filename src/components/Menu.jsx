@@ -2,12 +2,13 @@ import { getAllTopics } from "../utils/api";
 import { useEffect, useState } from "react";
 import { Loader } from "../components";
 import { Alert } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Menu = () => {
   const [topics, setTopics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const navigate = useNavigate();
 
@@ -17,8 +18,7 @@ const Menu = () => {
   }
 
   const handleTopicClick = (e) => {
-    navigate({pathname:'/',
-    search: `?topic=${e.target.attributes.tag.value}`})
+    setSearchParams(`?topic=${e.target.attributes.tag.value}`)
     window.location.reload(false)
   }
 
