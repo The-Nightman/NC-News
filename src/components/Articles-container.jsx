@@ -2,12 +2,12 @@ import { ArticleCard, Loader } from "../components";
 import { useEffect, useState } from "react";
 import { getAllArticles } from "../utils/api";
 
-const ArticlesContainer = () => {
+const ArticlesContainer = ({ sort_by, order, topic }) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAllArticles()
+    getAllArticles( sort_by, order, topic )
       .then((data) => {
         setArticles(data);
         setLoading(false);
