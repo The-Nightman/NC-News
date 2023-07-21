@@ -6,6 +6,7 @@ import ArticlesContainer from "./Articles-container";
 import ArticleButtons from "./Article-buttons";
 import CommentCard from "./Comment-cards";
 import CommentsContainer from "./Comments-container";
+import CommentPost from "./Comment-post";
 import UserCard from "./User-card";
 import UsersContainer from "./Users-container";
 import Loader from "./loader";
@@ -22,4 +23,5 @@ export {
   Loader,
   CommentsContainer,
   ArticleButtons,
+  CommentPost,
 };

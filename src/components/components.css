@@ -86,3 +86,19 @@ body {
     display: flex;
     justify-content: space-between;
 }
+/* new comment */
+.new-comment-container {
+    background-color: var(--lightmode-background);
+    border-radius: 1rem;
+    margin: 0.5rem;
+}
+.comment-form {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+}
+.comment-form-button-container {
+    display: flex;
+    justify-content: right;
+}
