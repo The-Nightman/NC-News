@@ -20,12 +20,28 @@ body {
 /* menu */
 .menu {
     position: absolute;
-    height: 90vh;
+    min-height: 90vh;
     width: 65vw;
     background-color: #c4c4c4;
     color: #1f1f1f;
     right: 0;
     z-index: 10;
+}
+.menu h3 {
+    padding-left: 0.5rem;
+}
+.menu ul {
+    padding-left: 0.5rem;
+    margin: 0;
+    list-style-type: none;
+}
+.menu-item {
+    font-weight: 400;
+    cursor: pointer;
+}
+.menu-item:hover, .menu-home-button:hover {
+    color: #af0303;
+    text-decoration: underline;
 }
 /* article cards */
 .article-card {
