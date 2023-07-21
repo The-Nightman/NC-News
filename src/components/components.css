@@ -10,11 +10,28 @@ body {
     background-color: #850000;
     display: flex;
     justify-content: center;
+    height: 10vh;
+}
+.menu-button {
+    position: absolute;
+    right: 0;
+    top: 0.8rem;
+}
+/* menu */
+.menu {
+    position: absolute;
+    height: 90vh;
+    width: 65vw;
+    background-color: #c4c4c4;
+    color: #1f1f1f;
+    right: 0;
+    z-index: 10;
 }
 /* article cards */
 .article-card {
     background-color: var(--lightmode-background);
     border-radius: 1rem;
+    margin: 0.5rem;
 }
 .article-card h2 {
     font-size: 1rem;
