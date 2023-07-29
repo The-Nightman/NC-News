@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/article/:article_id" element={<ArticlePage />} />
-          <Route path="/users" element={<Users />} />
+          {/* <Route path="/users" element={<Users />} /> */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </UsernameContextProvider>
