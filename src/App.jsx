@@ -1,17 +1,23 @@
 import { Routes, Route } from "react-router-dom";
-import { Home, ArticlePage, Users } from './pages'
+import { Home, ArticlePage, Users } from "./pages";
 import { Header } from "./components";
+import {
+  UsernameContext,
+  UsernameContextProvider,
+} from "./contexts/UserContext";
 import "./components/components.css";
 
 function App() {
   return (
     <>
-      <Header/>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/article/:article_id" element={<ArticlePage />} />
-        <Route path="/users" element={<Users />} />
-      </Routes>
+      <UsernameContextProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/article/:article_id" element={<ArticlePage />} />
+          <Route path="/users" element={<Users />} />
+        </Routes>
+      </UsernameContextProvider>
     </>
   );
 }
