@@ -135,3 +135,14 @@ body {
     display: flex;
     justify-content: right;
 }
+/* filter */
+.filter-buttons{
+    padding-top: 0.5rem;
+    background-color: var(--lightmode-background);
+    display: flex;
+}
+.filter {
+    width: 50%;
+}
+
+
