@@ -1,17 +1,25 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Loader } from "../components";
-import { Button, TextField, Alert, createTheme, ThemeProvider } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Alert,
+  createTheme,
+  ThemeProvider,
+} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { postNewComment } from "../utils/api";
 import CommentCard from "./Comment-cards";
 import { newDate } from "../utils/utils";
+import { UsernameContext } from "../contexts/UserContext";
 
 const CommentPost = ({ article_id, setComments }) => {
-  const [postStatus, setPostStatus] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const { user } = useContext(UsernameContext);
+  const [postStatus, setPostStatus] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [comment, setComment] = useState("");
   const [commentStatus, setCommentStatus] = useState("");
-  let placeholder = { author: "weegembump", votes: 0 }
+  let placeholder = { author: user.username, votes: 0 };
 
   const theme = createTheme({
     palette: {
@@ -27,79 +35,30 @@ const CommentPost = ({ article_id, setComments }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true)
-    setPostStatus(true)
+    setLoading(true);
+    setPostStatus(true);
     postNewComment(article_id, {
       body: comment,
       author: placeholder.author,
     })
       .then((data) => {
         setCommentStatus("success");
-        setLoading(false)
+        setLoading(false);
         setComments((comments) => {
           return [...comments, data];
         });
       })
       .catch((err) => {
-        setLoading(false)
-        setPostStatus(false)
+        setLoading(false);
+        setPostStatus(false);
         setCommentStatus("error");
       });
   };
-
   return (
     <>
-    { loading ? <Loader/> : null }
-    <ThemeProvider theme={theme}>
-      {commentStatus === "" ? (
-        <div className="new-comment-container">
-          <form
-            className="comment-form"
-            action=""
-            method="post"
-            onSubmit={handleSubmit}
-          >
-            <TextField
-              required
-              multiline
-              id="comment-input"
-              type="text"
-              label="New Comment"
-              variant="standard"
-              value={comment}
-              disabled={postStatus}
-              onChange={handleChange}
-            />
-            <div className="comment-form-button-container">
-              <Button
-                type="submit"
-                className="comment-form-button"
-                variant="outlined"
-                disabled={postStatus}
-                endIcon={<SendIcon />}
-              >
-                Send
-              </Button>
-            </div>
-          </form>
-        </div>
-      ) : commentStatus === "success" ? (
-        <>
-          <Alert severity="success" style={{ margin: "0.5rem" }}>
-            Your comment has successfully posted!
-          </Alert>
-          <CommentCard
-            author={placeholder.author}
-            created_at={newDate()}
-            body={comment}
-            votes={placeholder.votes}
-          />
-        </>
-      ) : commentStatus === "error" ? (
-        <>
-          <Alert severity="warning" style={{ margin: "0.5rem" }}>
-            An error has occured, please try again or refresh the page!
-          </Alert>
+      {loading ? <Loader /> : null}
+      <ThemeProvider theme={theme}>
+        {commentStatus === "" ? (
           <div className="new-comment-container">
             <form
               className="comment-form"
@@ -131,12 +90,60 @@ const CommentPost = ({ article_id, setComments }) => {
               </div>
             </form>
           </div>
-        </>
-      ) : (
-        <Alert severity="error" style={{ margin: "0.5rem" }}>
-          An unknown error has occured, please refresh the page!
-        </Alert>
-      )}
+        ) : commentStatus === "success" ? (
+          <>
+            <Alert severity="success" style={{ margin: "0.5rem" }}>
+              Your comment has successfully posted!
+            </Alert>
+            <CommentCard
+              author={placeholder.author}
+              created_at={newDate()}
+              body={comment}
+              votes={placeholder.votes}
+            />
+          </>
+        ) : commentStatus === "error" ? (
+          <>
+            <Alert severity="warning" style={{ margin: "0.5rem" }}>
+              An error has occured, please try again or refresh the page!
+            </Alert>
+            <div className="new-comment-container">
+              <form
+                className="comment-form"
+                action=""
+                method="post"
+                onSubmit={handleSubmit}
+              >
+                <TextField
+                  required
+                  multiline
+                  id="comment-input"
+                  type="text"
+                  label="New Comment"
+                  variant="standard"
+                  value={comment}
+                  disabled={postStatus}
+                  onChange={handleChange}
+                />
+                <div className="comment-form-button-container">
+                  <Button
+                    type="submit"
+                    className="comment-form-button"
+                    variant="outlined"
+                    disabled={postStatus}
+                    endIcon={<SendIcon />}
+                  >
+                    Send
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </>
+        ) : (
+          <Alert severity="error" style={{ margin: "0.5rem" }}>
+            An unknown error has occured, please refresh the page!
+          </Alert>
+        )}
       </ThemeProvider>
     </>
   );
