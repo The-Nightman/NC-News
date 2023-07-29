@@ -18,7 +18,7 @@ const Menu = () => {
   }
 
   const handleTopicClick = (e) => {
-    setSearchParams(`topic=${e.target.attributes.tag.value}`)
+    setSearchParams({topic : e.target.attributes.tag.value})
     window.location.reload(false)
   }
 
