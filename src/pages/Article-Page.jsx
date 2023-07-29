@@ -2,12 +2,14 @@ import { Article, Loader, CommentsContainer } from "../components";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getArticleByID } from "../utils/api";
+import { Alert } from "@mui/material";
 
 const ArticlePage = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [showComments, setShowComments] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   const openComments = () => {
     setShowComments(!showComments);
@@ -20,7 +22,8 @@ const ArticlePage = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setErrorStatus(true)
+        setLoading(false);
       });
   }, []);
 
@@ -28,6 +31,10 @@ const ArticlePage = () => {
     <>
       {loading ? (
         <Loader />
+      ) : errorStatus ? (
+        <Alert severity="error" style={{ margin: "0.5rem" }}>
+          Article does not exist!
+        </Alert>
       ) : (
         <Article article={article} openComments={openComments} />
       )}

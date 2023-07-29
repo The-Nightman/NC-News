@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Home, ArticlePage, Users } from "./pages";
+import { Home, ArticlePage, Users, ErrorPage } from "./pages";
 import { Header } from "./components";
 import {
   UsernameContext,
@@ -16,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/article/:article_id" element={<ArticlePage />} />
           <Route path="/users" element={<Users />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </UsernameContextProvider>
     </>
